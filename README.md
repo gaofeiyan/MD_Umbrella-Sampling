@@ -1,6 +1,10 @@
 # MD_Umbrella-Sampling
 
 
+
+
+gmx make_ndx -f npt.gro #recognize the corresponding names of protein and ligand
+
 gmx grompp -f md_pull.mdp -c npt.gro -p topol.top -r npt.gro -n index.ndx -t npt.cpt -o pull.tpr
 
 gmx mdrun -deffnm pull -pf pullf.xvg -px pullx.xvg
