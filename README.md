@@ -1,10 +1,10 @@
 # MD_Umbrella-Sampling
 
-gmx pdb2gmx -f protein.pdb -ignh -ter -o complex.gro
+gmx pdb2gmx -f protein_prepared.pdb -o protein.gro -p topol.top -ignh
 
-gmx editconf -f complex.gro -o newbox.gro  -box 6.560 4.362 12  #可以用pymol或者VMD计算蛋白距离，要注意，拉动的距离一定要小于盒子的一半（主要为了区别于PBC周期边界条件）
+gmx editconf -f complex.gro -o newbox.gro -box 6.560 4.362 12  #可以用pymol或者VMD计算蛋白距离，要注意，拉动的距离一定要小于盒子的一半（主要为了区别于PBC周期边界条件）
 
-> pbc box #对盒子进行观察
+> pbc box #VMD命令，对盒子进行观察
 
 gmx solvate -cp newbox.gro -cs spc216.gro -o solv.gro -p topol.top
 
