@@ -44,3 +44,5 @@ for script in frame-*.sh; do
 
 .done
 ```
+nohup bash ./squence.sh &
+
