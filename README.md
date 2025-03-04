@@ -2,6 +2,46 @@
 
 gmx pdb2gmx -f protein_prepared.pdb -o protein.gro -p topol.top -ignh
 
+  选择amber14力场
+  
+输入2
+  
+  选择tip3的水模型
+输入1
+  
+  第二步是生成限制文件posre_lig.itp，用来限制蛋白质在整个体系中的运动
+
+gmx genrestr -f molecule.gro -o posre_lig.itp
+  
+  选择对整个体系进行限制，默认是xyz方向各1000k的力
+
+选0
+
+  将配体itp文件引入限制文件的参数中，针对配体也进行限制
+
+修改ligand的itp文件，在最末尾添加以下命令  
+
+ifdef POSRES
+
+include "posre_lig.itp"
+
+endif
+
+  将配体的top文件与蛋白质top文件进行合并 合并到蛋白质文件
+
+在topol.top文件的include "amber14sb_parmbsc1.ff/forcefield.itp"后面空行添加以下命令
+
+; Include ligand topologies
+
+include "lig1.itp"
+
+把ligand的名字添加到末尾
+
+  将配体的gro文件与蛋白质gro文件进行合并
+
+将ligand的gro文件中MOL行复制到protein.gro文件倒数第二行，并将protein.gro的原子数相加
+
+
 gmx editconf -f complex.gro -o newbox.gro -box 6.560 4.362 12  #可以用pymol或者VMD计算蛋白距离，要注意，拉动的距离一定要小于盒子的一半（主要为了区别于PBC周期边界条件）
 
 > pbc box #VMD命令，对盒子进行观察
