@@ -93,7 +93,7 @@ touch  squence.sh  # 将 .sh 文件一个个进行批次运行
 ```
 for script in frame-*.sh; do
     ./$script
-.done
+done
 ```
 nohup bash ./squence.sh &
 
