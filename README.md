@@ -48,6 +48,9 @@ measure minmax $sel
 gmx editconf -f complex.gro -o newbox.gro -box 6.560 4.362 12  #可以用pymol或者VMD计算蛋白距离，要注意，拉动的距离一定要小于盒子的一半（主要为了区别于PBC周期边界条件）
 
 > pbc box #VMD命令，对盒子进行观察
+#不合适的选择平移
+
+gmx editconf -f newbox.gro -o newbox.gro  -translate 0 0 3 #向z轴正方向平移3nm
 
 gmx solvate -cp newbox.gro -cs spc216.gro -o solv.gro -p topol.top
 
