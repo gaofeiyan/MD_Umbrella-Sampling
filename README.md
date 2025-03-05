@@ -48,6 +48,13 @@ include "lig1.itp"
 
 gmx editconf -f complex.gro -o newbox.gro -box 6.560 4.362 12  #可以用pymol或者VMD计算蛋白距离，要注意，拉动的距离一定要小于盒子的一半（主要为了区别于PBC周期边界条件）
 
+```
+关于质心
+gmx editconf -f complex.gro -o newbox.gro -center 0 0 0 -box 6.560 4.362 12
+- center 0 0 0 是规定将蛋白放在盒子中心位置，这种为一般情况设置，前期设置了质心，就不用在npt_umbrella.mdp和md_umbrella.mdp中再添加pull-group1-pbcatom     = -1 了
+质心的计算会有新一个专栏研究
+```
+
 > pbc box #VMD命令，对盒子进行观察
 #不合适的选择平移
 
