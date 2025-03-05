@@ -1,0 +1,66 @@
+title       = Umbrella pulling simulation 
+define      = -DPOSRES_B
+; Run parameters
+integrator  = md
+dt          = 0.002
+tinit       = 0
+nsteps      = 250000    ; 500 ps
+nstcomm     = 10
+; Output parameters
+nstxout     = 5000      ; every 10 ps
+nstvout     = 5000 
+nstfout     = 500
+nstxtcout   = 500       ; every 1 ps
+nstenergy   = 500
+; Bond parameters
+constraint_algorithm    = lincs
+constraints             = all-bonds
+continuation            = yes       ; continuing from NPT 
+; Single-range cutoff scheme
+cutoff-scheme   = Verlet
+nstlist         = 20 
+ns_type         = grid 
+rlist           = 1.4
+rcoulomb        = 1.4
+rvdw            = 1.4
+; PME electrostatics parameters
+coulombtype     = PME
+fourierspacing  = 0.12
+fourier_nx      = 0
+fourier_ny      = 0
+fourier_nz      = 0
+pme_order       = 4
+ewald_rtol      = 1e-5
+optimize_fft    = yes
+; Berendsen temperature coupling is on in two groups
+Tcoupl      = Nose-Hoover
+tc_grps     = Protein   Non-Protein 
+tau_t       = 1.0       1.0
+ref_t       = 310       310
+; Pressure coupling is on
+Pcoupl          = Parrinello-Rahman 
+pcoupltype      = isotropic
+tau_p           = 1.0       
+compressibility = 4.5e-5
+ref_p           = 1.0
+refcoord_scaling = com
+; Generate velocities is off
+gen_vel     = no 
+; Periodic boundary conditions are on in all directions
+pbc     = xyz
+; Long-range dispersion correction
+DispCorr    = EnerPres
+
+; Pull code
+pull                 = yes ; 有无质心牵引
+pull_ngroups         = 2  ; 牵引组数目
+pull_ncoords         = 1  ; 牵引坐标数目
+pull_group1_name     = Protein ; 牵引组名称，对应index文件里面的名称
+pull_group2_name     = MOL ;
+pull_coord1_type     = umbrella ; 使用参考组与一个或多个组之间的伞型势来牵引质心
+pull_coord1_geometry = distance ; 连接两个组的向量进行牵引（distance/direction-periodic）
+pull_coord1_groups   = 1 2 ; 与此牵引坐标作用的组的索引
+pull_coord1_dim      = N N Y ; 选择此牵引坐标作用的维度，分别对应X,Y,Z三个分量（N表示关闭，Y表示开启）
+pull_coord1_rate     = 0.005 ; 牵引速率（nm/ps,度/ps）
+pull_coord1_k        = 1500 ; 弹簧刚度（kJ mol^-1^ nm^-2^）
+pull_coord1_start    = yes ; 将初始构型的质心距离加到pull-coord1-init
