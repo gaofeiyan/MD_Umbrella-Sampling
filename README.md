@@ -84,8 +84,12 @@ the box size (7.300317 nm).
 
 gmx trjconv -s pull.tpr -f pull.xtc -o conf.gro -sep
 
-python2 ./setupUmbrella.py summary_distances.dat 0.2 run-umbrella.sh &> caught-output.txt   #如果output.txt没有文本输出，直接 yes | python2 ./setupUmbrella.py summary_distances.dat 0.2 run-umbrella.sh
+python2 ./setupUmbrella.py summary_distances.dat 0.2 run-umbrella.sh &> caught-output.txt   
 
+#如果output.txt没有文本输出，直接 
+```
+yes | python2 ./setupUmbrella.py summary_distances.dat 0.2 run-umbrella.sh
+```
 chmod +x frame-*.sh  #将生成的 .sh 文件给予权限
 
 touch  squence.sh  # 将 .sh 文件一个个进行批次运行
