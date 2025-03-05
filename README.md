@@ -40,9 +40,10 @@ include "lig1.itp"
 将ligand的gro文件中MOL行复制到protein.gro文件倒数第二行，并将protein.gro的原子数相加
 
 #VMD计算蛋白长宽高：
-set sel [atomselect top "protein"]       > set minmax [measure minmax $all]
+>set sel [atomselect top "protein"]
 
-measure minmax $sel
+>set minmax [measure minmax $sel]
+
 #计算结果为 {x_min y_min z_min}，{x_max y_max z_max} 单位为Å，要换算成Gromacs的nm（/10）
 
 gmx editconf -f complex.gro -o newbox.gro -box 6.560 4.362 12  #可以用pymol或者VMD计算蛋白距离，要注意，拉动的距离一定要小于盒子的一半（主要为了区别于PBC周期边界条件）
@@ -73,7 +74,7 @@ rename 13 MOL1    #记得把重复的MOL分开，if 两个MOL，一个就命名�
 
 gmx grompp -f md_pull.mdp -c npt.gro -p topol.top -r npt.gro -n index.ndx -t npt.cpt -o pull.tpr
 
-gmx mdrun -deffnm pull -pf pullf.xvg -px pullx.xvg
+gmx mdrun -deffnm pull -pf pullf.xvg -px pullx.xvg -v
 
 gmx trjconv -s pull.tpr -f pull.xtc -o conf.gro -sep
 
