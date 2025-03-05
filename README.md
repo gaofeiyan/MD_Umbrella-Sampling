@@ -21,11 +21,9 @@ gmx genrestr -f molecule.gro -o posre_lig.itp
 
 修改ligand的itp文件，在最末尾添加以下命令  
 
-ifdef POSRES
-
-include "posre_lig.itp"
-
-endif
+#ifdef POSRES
+#include "posre_lig.itp"
+#endif
 
   将配体的top文件与蛋白质top文件进行合并 合并到蛋白质文件
 
