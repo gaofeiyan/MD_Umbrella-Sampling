@@ -64,7 +64,7 @@ gmx mdrun -v -deffnm em
 
 gmx grompp -f npt.mdp -c em.gro -p topol.top -r em.gro -o npt.tpr
 
-gmx mdrun -deffnm npt
+gmx mdrun -v -deffnm npt
 
 gmx make_ndx -f npt.gro #recognize the corresponding names of protein and ligand
                      
