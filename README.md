@@ -43,7 +43,7 @@ include "lig1.itp"
 set sel [atomselect top "protein"]
 
 measure minmax $sel
-#计算结果为 {x_min y_min z_min}，{x_max y_max z_max} 
+#计算结果为 {x_min y_min z_min}，{x_max y_max z_max} 单位为Å，要换算成Gromacs的nm（/10）
 
 gmx editconf -f complex.gro -o newbox.gro -box 6.560 4.362 12  #可以用pymol或者VMD计算蛋白距离，要注意，拉动的距离一定要小于盒子的一半（主要为了区别于PBC周期边界条件）
 
