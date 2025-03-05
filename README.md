@@ -74,7 +74,13 @@ rename 13 MOL1    #记得把重复的MOL分开，if 两个MOL，一个就命名�
 
 gmx grompp -f md_pull.mdp -c npt.gro -p topol.top -r npt.gro -n index.ndx -t npt.cpt -o pull.tpr
 
-gmx mdrun -deffnm pull -pf pullf.xvg -px pullx.xvg -v
+gmx mdrun -deffnm pull -pf pullf.xvg -px pullx.xvg -v 
+##注意在增加了盒子尺寸后仍有报错Fatal error:
+```
+Distance between pull groups 1 and 2 (7.300399 nm) is larger than 0.49 times
+the box size (7.300317 nm).
+```
+#可能原因是拉伸的速度太快，导致中途超过了pbc box，就要用md_umbrella_2.mdp进行低速率拉动。
 
 gmx trjconv -s pull.tpr -f pull.xtc -o conf.gro -sep
 
