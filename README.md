@@ -40,7 +40,7 @@ include "lig1.itp"
 将ligand的gro文件中MOL行复制到protein.gro文件倒数第二行，并将protein.gro的原子数相加
 
 #VMD计算蛋白长宽高：
-set sel [atomselect top "protein"]
+set sel [atomselect top "protein"]       > set minmax [measure minmax $all]
 
 measure minmax $sel
 #计算结果为 {x_min y_min z_min}，{x_max y_max z_max} 单位为Å，要换算成Gromacs的nm（/10）
