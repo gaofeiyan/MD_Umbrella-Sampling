@@ -117,6 +117,8 @@ touch pullf-files.dat  #分别将生成的umbrellaX_pullf.xvg （ls umbrella*_pu
 
 两个文件中，分别每行一个tpr/xvg，删除每个tpr/xvg后的多余空格。  #非常重要
 
+gmx wham -it tpr-files.dat -if pullf-files.dat -o -hist -unit kCal
+
 生成的 histo.xvg和 profile.xvg即最终结果
 
 
