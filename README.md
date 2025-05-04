@@ -75,6 +75,18 @@ gmx grompp -f npt.mdp -c em.gro -p topol.top -r em.gro -o npt.tpr
 gmx mdrun -v -deffnm npt
 
 gmx make_ndx -f npt.gro #recognize the corresponding names of protein and ligand
+
+######################## 如果是纯蛋白模拟
+ 
+gmx make_ndx -f npt.gro    
+...
+ > r 1-27
+ > name 19 Chain_A
+ > r 28-54
+ > name 20 Chain_B
+ > q
+
+#######################
                      
 rename 13 MOL1    #记得把重复的MOL分开，if 两个MOL，一个就命名为MOL1，另一个保持不变MOL，很重要
 
